@@ -19,16 +19,19 @@ export const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm contacts={phonebook.contacts} />
+      <ContactForm phonebook={phonebook} setPhonebook={setPhonebook} />
 
       <h2>Contacts</h2>
       <Filter
         phonebook={phonebook}
         setPhonebook={setPhonebook}
-        filteredContacts={filteredContacts}
         setFilteredContacts={setFilteredContacts}
       />
-      <ContactList phonebook={phonebook} filteredContacts={filteredContacts} />
+      <ContactList
+        phonebook={phonebook}
+        setPhonebook={setPhonebook}
+        filteredContacts={filteredContacts}
+      />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 
-const ContactForm = ({ contacts }) => {
+const ContactForm = ({ phonebook, setPhonebook }) => {
   const [contact, setContact] = useState({
     id: '',
     name: '',
@@ -15,9 +15,20 @@ const ContactForm = ({ contacts }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    contacts.push(contact);
-    console.log(contacts);
-    setContact({ id: '', name: '', number: '' });
+    const isContactInList = phonebook.contacts.some(element => {
+      if (element.name === contact.name) {
+        return true;
+      }
+      return false;
+    });
+    if (isContactInList) {
+      alert(`${contact.name} is already in contacts.`);
+    } else {
+      const array = phonebook.contacts.slice();
+      array.push(contact);
+      setPhonebook({ ...phonebook, contacts: array });
+      setContact({ id: '', name: '', number: '' });
+    }
   };
 
   return (
@@ -29,7 +40,7 @@ const ContactForm = ({ contacts }) => {
           name="name"
           value={contact.name}
           onChange={getContactInfo}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="^[a-zA-Zа-яА-Я]+(([a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
