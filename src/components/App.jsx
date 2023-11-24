@@ -30,6 +30,7 @@ export const App = () => {
       <ContactList
         phonebook={phonebook}
         setPhonebook={setPhonebook}
+        setFilteredContacts={setFilteredContacts}
         filteredContacts={filteredContacts}
       />
     </div>

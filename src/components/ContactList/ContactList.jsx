@@ -1,11 +1,21 @@
 import ContactListItem from './ContactListItem';
 
-const ContactList = ({ setPhonebook, phonebook, filteredContacts }) => {
-  const removeContact = e => {
-    const removing = phonebook.contacts.filter(
-      contact => contact.name !== e.target.value
-    );
-    setPhonebook({ ...phonebook, contacts: removing });
+const ContactList = ({
+  setPhonebook,
+  phonebook,
+  filteredContacts,
+  setFilteredContacts,
+}) => {
+  const removeContact = id => {
+    if (phonebook.filter === '') {
+      const removing = phonebook.contacts.filter(contact => contact.id !== id);
+      setPhonebook({ ...phonebook, contacts: removing });
+    } else {
+      const removingF = filteredContacts.filter(contact => contact.id !== id);
+      setFilteredContacts([...removingF]);
+      const removing = phonebook.contacts.filter(contact => contact.id !== id);
+      setPhonebook({ ...phonebook, contacts: removing });
+    }
   };
   return (
     <ul>
@@ -16,6 +26,7 @@ const ContactList = ({ setPhonebook, phonebook, filteredContacts }) => {
               name={item.name}
               number={item.number}
               onRemove={removeContact}
+              id={item.id}
             />
           ))
         : filteredContacts?.map(item => (
@@ -24,6 +35,7 @@ const ContactList = ({ setPhonebook, phonebook, filteredContacts }) => {
               name={item.name}
               number={item.number}
               onRemove={removeContact}
+              id={item.id}
             />
           ))}
     </ul>
