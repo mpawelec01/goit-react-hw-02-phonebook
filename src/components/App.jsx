@@ -14,7 +14,9 @@ export const App = () => {
     filter: '',
   });
 
-  const [filteredContacts, setFilteredContacts] = useState(phonebook.contacts);
+  const filteredContacts = phonebook.contacts?.filter(contact =>
+    contact.name.toLowerCase().includes(phonebook.filter.toLowerCase())
+  );
 
   return (
     <div>
@@ -22,15 +24,10 @@ export const App = () => {
       <ContactForm phonebook={phonebook} setPhonebook={setPhonebook} />
 
       <h2>Contacts</h2>
-      <Filter
-        phonebook={phonebook}
-        setPhonebook={setPhonebook}
-        setFilteredContacts={setFilteredContacts}
-      />
+      <Filter phonebook={phonebook} setPhonebook={setPhonebook} />
       <ContactList
         phonebook={phonebook}
         setPhonebook={setPhonebook}
-        setFilteredContacts={setFilteredContacts}
         filteredContacts={filteredContacts}
       />
     </div>

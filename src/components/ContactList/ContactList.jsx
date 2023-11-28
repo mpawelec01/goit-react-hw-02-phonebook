@@ -1,21 +1,9 @@
 import ContactListItem from './ContactListItem';
 
-const ContactList = ({
-  setPhonebook,
-  phonebook,
-  filteredContacts,
-  setFilteredContacts,
-}) => {
+const ContactList = ({ setPhonebook, phonebook, filteredContacts }) => {
   const removeContact = id => {
-    if (phonebook.filter === '') {
-      const removing = phonebook.contacts.filter(contact => contact.id !== id);
-      setPhonebook({ ...phonebook, contacts: removing });
-    } else {
-      const removingF = filteredContacts.filter(contact => contact.id !== id);
-      setFilteredContacts([...removingF]);
-      const removing = phonebook.contacts.filter(contact => contact.id !== id);
-      setPhonebook({ ...phonebook, contacts: removing });
-    }
+    const removing = phonebook.contacts.filter(contact => contact.id !== id);
+    setPhonebook({ ...phonebook, contacts: removing });
   };
   return (
     <ul>

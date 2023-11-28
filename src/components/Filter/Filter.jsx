@@ -1,11 +1,7 @@
-const Filter = ({ phonebook, setPhonebook, setFilteredContacts }) => {
+const Filter = ({ phonebook, setPhonebook }) => {
   const handleFilterChange = e => {
     const searchTerm = e.target.value;
     setPhonebook({ ...phonebook, filter: searchTerm });
-    const filteredItems = phonebook.contacts?.filter(contact =>
-      contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredContacts(filteredItems);
   };
   return (
     <label>
